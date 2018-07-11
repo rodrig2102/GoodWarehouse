@@ -1,0 +1,399 @@
+doctype 
+html(lang='en')
+  head
+    title GoodWarehouse
+    //
+      Known Template
+      http://www.templatemo.com/tm-516-known
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=Edge')
+    meta(name='description', content='')
+    meta(name='keywords', content='')
+    meta(name='author', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/css/owl.carousel.css')
+    link(rel='stylesheet', href='/css/owl.theme.default.min.css')
+    // MAIN CSS
+    link(rel='stylesheet', href='css/templatemo-style.css')
+  body#top(data-spy='scroll', data-target='.navbar-collapse', data-offset='50')
+    // PRE LOADER
+    section.preloader
+      .spinner
+        span.spinner-rotate
+    // MENU
+    section.navbar.custom-navbar.navbar-fixed-top(role='navigation')
+      .container
+        .navbar-header
+          button.navbar-toggle(data-toggle='collapse', data-target='.navbar-collapse')
+            span.icon.icon-bar
+            span.icon.icon-bar
+            span.icon.icon-bar
+          // lOGO TEXT HERE
+          a.navbar-brand(href='#') GoodWarehouse
+        // MENU LINKS
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-nav-first
+            li
+              a.smoothScroll(href='#top') Inicio
+            li
+              a.smoothScroll(href='#about') Beneficios
+            li
+              a.smoothScroll(href='#team') Ubícanos
+            li
+              a.smoothScroll(href='#courses') Almacenamiento
+            li
+              a.smoothScroll(href='#testimonial') Comentarios
+            li
+              a.smoothScroll(href='#contact') Contacto
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='login')
+                i
+                |  Mi Cuenta
+    // HOME
+    section#home
+      .row
+        .owl-carousel.owl-theme.home-slider
+          .item.item-first
+            .caption
+              .container
+                .col-md-6.col-sm-12
+                  h1 El lugar más seguro que existe
+                  h2 Descansa y déjanos guardar tus pertenencias.
+          .item.item-second
+            .caption
+              .container
+                .col-md-6.col-sm-12
+                  h1 Primero en Servicio
+                  h2 almacenamiento más limpias y seguro.
+          .item.item-third
+            .caption
+              .container
+                .col-md-6.col-sm-12
+                  h1 Tenemos Almacenes ideales para ti
+                  h2 soluciones a medida de acuerdo a sus necesidades.
+                  a.section-btn.btn.btn-default.smoothScroll(href='#contact') Let's chat
+    // Beneficios
+    section#about
+      .container
+        .row
+          .col-md-6.col-sm-12
+            .about-info
+              h2 Beneficios que ofrecemos:
+              figure
+                span
+                  i.fa.fa-users
+                figcaption
+                  h3 Flexibilidad
+                  p
+                    | La duración del arrendamiento será libremente pactada por las partes, alquila por meses o años
+              figure
+                span
+                  i.fa.fa-certificate
+                figcaption
+                  h3 Seguridad
+                  p
+                    | Sólo tú y las personas a quienes les otorgues el derecho, tendrán la clave para tu espacio.
+              figure
+                span
+                  i.fa.fa-bar-chart-o
+                figcaption
+                  h3 Ambiente seco y libre de polvo
+          .col-md-offset-1.col-md-4.col-sm-12
+            .entry-form
+              form(action='#', method='post')
+                h2 Regístrate hoy
+                input.form-control(type='text', name='full name', placeholder='Ingrese un nombre de usurio', required='')
+                input.form-control(type='email', name='email', placeholder='Ingrese su correo', required='')
+                input.form-control(type='password', name='password', placeholder='Ingrese una contraseña', required='')
+                button#form-submit.submit-btn.form-control Registrarse
+    // TEAM
+    section#team
+      .container
+        .row
+          .col-md-12.col-sm-12
+            .section-title
+              h2 Ubicación 
+          .col-md-3.col-sm-6
+            iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3828.5060698419975!2d-79.58488811870531!3d9.000653688172926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8faca7cba643f6f5%3A0xf6aaaaa1c407bff!2sClayton%2C+Panam%C3%A1!5e0!3m2!1ses!2spa!4v1529978128770', width='1150', height='450', frameborder='0', style='border:0', allowfullscreen='')
+    // Courses
+    section#courses
+      .container
+        .row
+          .col-md-12.col-sm-12
+            .section-title
+              h2
+                | Popular Courses 
+                small Upgrade your skills with newest courses
+            .owl-carousel.owl-theme.owl-courses
+              .col-md-4.col-sm-4
+                .item
+                  .courses-thumb
+                    .courses-top
+                      .courses-image
+                        img.img-responsive(src='images/courses-image1.jpg', alt='')
+                      .courses-date
+                        span
+                          i.fa.fa-calendar
+                          |  12 / 7 / 2018
+                        span
+                          i.fa.fa-clock-o
+                          |  7 Hours
+                    .courses-detail
+                      h3
+                        a(href='#') Social Media Management
+                      p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    .courses-info
+                      .courses-author
+                        img.img-responsive(src='images/author-image1.jpg', alt='')
+                        span Mark Wilson
+                      .courses-price
+                        a(href='#')
+                          span USD 25
+              .col-md-4.col-sm-4
+                .item
+                  .courses-thumb
+                    .courses-top
+                      .courses-image
+                        img.img-responsive(src='images/courses-image2.jpg', alt='')
+                      .courses-date
+                        span
+                          i.fa.fa-calendar
+                          |  20 / 7 / 2018
+                        span
+                          i.fa.fa-clock-o
+                          |  4.5 Hours
+                    .courses-detail
+                      h3
+                        a(href='#') Graphic & Web Design
+                      p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    .courses-info
+                      .courses-author
+                        img.img-responsive(src='images/author-image2.jpg', alt='')
+                        span Jessica
+                      .courses-price
+                        a(href='#')
+                          span USD 80
+              .col-md-4.col-sm-4
+                .item
+                  .courses-thumb
+                    .courses-top
+                      .courses-image
+                        img.img-responsive(src='images/courses-image3.jpg', alt='')
+                      .courses-date
+                        span
+                          i.fa.fa-calendar
+                          |  15 / 8 / 2018
+                        span
+                          i.fa.fa-clock-o
+                          |  6 Hours
+                    .courses-detail
+                      h3
+                        a(href='#') Marketing Communication
+                      p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    .courses-info
+                      .courses-author
+                        img.img-responsive(src='images/author-image3.jpg', alt='')
+                        span Catherine
+                      .courses-price.free
+                        a(href='#')
+                          span Free
+              .col-md-4.col-sm-4
+                .item
+                  .courses-thumb
+                    .courses-top
+                      .courses-image
+                        img.img-responsive(src='images/courses-image4.jpg', alt='')
+                      .courses-date
+                        span
+                          i.fa.fa-calendar
+                          |  10 / 8 / 2018
+                        span
+                          i.fa.fa-clock-o
+                          |  8 Hours
+                    .courses-detail
+                      h3
+                        a(href='#') Summer Kids
+                      p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    .courses-info
+                      .courses-author
+                        img.img-responsive(src='images/author-image1.jpg', alt='')
+                        span Mark Wilson
+                      .courses-price
+                        a(href='#')
+                          span USD 45
+              .col-md-4.col-sm-4
+                .item
+                  .courses-thumb
+                    .courses-top
+                      .courses-image
+                        img.img-responsive(src='images/courses-image5.jpg', alt='')
+                      .courses-date
+                        span
+                          i.fa.fa-calendar
+                          |  5 / 10 / 2018
+                        span
+                          i.fa.fa-clock-o
+                          |  10 Hours
+                    .courses-detail
+                      h3
+                        a(href='#') Business & Management
+                      p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    .courses-info
+                      .courses-author
+                        img.img-responsive(src='images/author-image2.jpg', alt='')
+                        span Jessica
+                      .courses-price.free
+                        a(href='#')
+                          span Free
+    // TESTIMONIAL
+    section#testimonial
+      .container
+        .row
+          .col-md-12.col-sm-12
+            .section-title
+              h2
+                | Comentarios de Clientes 
+                small en todo el país
+            .owl-carousel.owl-theme.owl-client
+              .col-md-4.col-sm-4
+                .item
+                  .tst-image
+                    img.img-responsive(src='images/tst-image1.jpg', alt='')
+                  .tst-author
+                    h4 Jackson
+                    span Shopify Developer
+                  p
+                    | You really do help young creative minds to get quality education and professional job search assistance. I’d recommend it to everyone!
+                  .tst-rating
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+              .col-md-4.col-sm-4
+                .item
+                  .tst-image
+                    img.img-responsive(src='images/tst-image2.jpg', alt='')
+                  .tst-author
+                    h4 Camila
+                    span Marketing Manager
+                  p
+                    | Trying something new is exciting! Thanks for the amazing law course and the great teacher who was able to make it interesting.
+                  .tst-rating
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+              .col-md-4.col-sm-4
+                .item
+                  .tst-image
+                    img.img-responsive(src='images/tst-image3.jpg', alt='')
+                  .tst-author
+                    h4 Barbie
+                    span Art Director
+                  p
+                    | Donec erat libero, blandit vitae arcu eu, lacinia placerat justo. Sed sollicitudin quis felis vitae hendrerit.
+                  .tst-rating
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+              .col-md-4.col-sm-4
+                .item
+                  .tst-image
+                    img.img-responsive(src='images/tst-image4.jpg', alt='')
+                  .tst-author
+                    h4 Andrio
+                    span Web Developer
+                  p
+                    | Nam eget mi eu ante faucibus viverra nec sed magna. Vivamus viverra sapien ex, elementum varius ex sagittis vel.
+                  .tst-rating
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+    // CONTACT
+    section#contact
+      .container
+        .row
+          .col-md-6.col-sm-12
+            form#contact-form(role='form', action='', method='post')
+              .section-title
+                h2
+                  | Contáctenos
+                  small nos encantan las conversaciones. ¡Dejanos hablar!
+              .col-md-12.col-sm-12
+                input.form-control(type='text', placeholder='Ingrese su nombre', name='name', required='')
+                input.form-control(type='email', placeholder='Ingrese su correo', name='email', required='')
+                textarea.form-control(rows='6', placeholder='Cuéntanos acerca de tu mensaje', name='message', required='')
+              .col-md-4.col-sm-12
+                input.form-control(type='submit', name='send message', value='Enviar Mensaje')
+          .col-md-6.col-sm-12
+            .contact-image
+              img.img-responsive(src='images/contact-image.jpg', alt='Smiling Two Girls')
+    // FOOTER
+    footer#footer
+      .container
+        .row
+          .col-md-4.col-sm-6
+            .footer-info
+              .section-title
+                h2 GoodWarehouse
+              address
+                p
+                  | Av. República de Panamá,
+                  br
+                  | 							 (Clayton con Av. Ramón Castilla)
+              ul.social-icon
+                li
+                  a.fa.fa-facebook-square(href='#', attr='facebook icon')
+                li
+                  a.fa.fa-twitter(href='#')
+                li
+                  a.fa.fa-instagram(href='#')
+              .copyright-text
+                p
+                  | Copyright © 2018 Company
+          .col-md-4.col-sm-6
+            .footer-info
+              .section-title
+                h2 Datos de contacto
+              address
+                p
+                  | +507 224 1100, +507 224 1101
+                p
+                  a(href='goodwarehouse@gmail.com') goodwarehouse@gmail.com
+              .footer_menu
+                h2 Quick Links
+                ul
+                  li
+                    a(href='#') Términos y condiciones
+                  li
+                    a(href='#') Politica de reembolso
+          .col-md-4.col-sm-12
+            .footer-info.newsletter-form
+              .section-title
+                h2 Inscríbase al boletín
+              div
+                .form-group
+                  form(action='#', method='get')
+                    input#email.form-control(type='email', placeholder='Ingrese su correo', name='email', required='')
+                    input#form-submit.form-control(type='submit', name='submit', value='Enviame')
+                  span
+                    sup *
+                    | Tenga en cuenta que no enviamos spam a su correo electrónico.
+    // SCRIPTS
+    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBf8ik_mqnQz70yqS9TkoWUm2mRU-k7O6Q&callback=initMap')
+    script(src='/js/funciones.js')
+    script(src='js/jquery.js')
+    script(src='js/bootstrap.min.js')
+    script(src='js/owl.carousel.min.js')
+    script(src='js/smoothscroll.js')
+    script(src='js/custom.js')

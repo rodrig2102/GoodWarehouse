@@ -1,0 +1,211 @@
+doctype html
+head
+  title GoodWarehouse
+  //
+    Known Template
+    http://www.templatemo.com/tm-516-known
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=Edge')
+  meta(name='description' content='')
+  meta(name='keywords' content='')
+  meta(name='author' content='')
+  meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
+  link(rel='stylesheet' href='css/bootstrap.min.css')
+  link(rel='stylesheet' href='css/font-awesome.min.css')
+  link(rel='stylesheet' href='css/owl.carousel.css')
+  link(rel='stylesheet' href='css/owl.theme.default.min.css')
+  link(rel='stylesheet' href='/css/login.css')
+  // MAIN CSS
+  link(rel='stylesheet' href='css/templatemo-style.css')
+// PRE LOADER
+section.preloader
+  .spinner
+    span.spinner-rotate
+// MENU
+section.navbar.custom-navbar.navbar-fixed-top(role='navigation')
+  .container
+    .navbar-header
+      button.navbar-toggle(data-toggle='collapse' data-target='.navbar-collapse')
+        span.icon.icon-bar
+        span.icon.icon-bar
+        span.icon.icon-bar
+      // lOGO TEXT HERE
+      a.navbar-brand(href='#') GoodWarehouse
+    // MENU LINKS
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-nav-first
+        li
+          a.smoothScroll(href='/#to') Inicio
+        li
+          a.smoothScroll(href='/#about') Beneficios
+        li
+          a.smoothScroll(href='/#team') Ub&iacute;canos
+        li
+          a.smoothScroll(href='/#courses') Almacenamiento
+        li
+          a.smoothScroll(href='/#testimonial') Comentarios
+        li
+          a.smoothScroll(href='/#contact') Contacto
+      ul.nav.navbar-nav.navbar-right
+        li
+          a(href='#')
+            i
+            |  Mi Cuenta
+section#login
+  .container
+    .row
+      .col-xs-12
+        .form-wrap
+          h1 Inicia sesi&oacute;n
+          form#login-form(role='form' method='post')
+            .form-group
+              label.sr-only(for='inputEmail') Usuario / Correo
+              input#inputEmail.form-control(type='email' name='email' placeholder='Inrese su correo o nombre de usuario', required='')
+            .form-group
+              label.sr-only(for='inputPassword') Contrase&ntilde;a
+              input#inputPassword.form-control(type='password' name='password' placeholder='Contraseña')
+            .checkbox
+              span.character-checkbox(onclick='showPassword()')
+              span.label Monstrar contrase&ntilde;a
+            input#btn-login.btn.btn-custom.btn-lg.btn-block(type='submit' value='Ingresar')
+          a.forget(href='javascript:;')
+            | 
+            forget(href='javascript:;' data-toggle='modal' data-target='.forget-modale') No tienes una cuenta?
+            br
+          a.forget(href='javascript:;' data-toggle='modal' data-target='.forget-modal') Olvidaste tu Contrase&ntilde;a?
+          hr
+      // /.col-xs-12
+    // /.row
+  // /.container
+
+//Recuperar Contraseña
+section
+  .modal.fade.forget-modal(tabindex='-1' role='dialog' aria-labelledby='myForgetModalLabel' aria-hidden='true')
+    .modal-dialog.modal-sm
+      .modal-content
+        .modal-header
+          button.close(type='button' data-dismiss='modalr')
+            span(aria-hidden='true') &times;
+            span.sr-only Cerrar
+          h4.modal-title Restaurar Contraseña
+        .modal-body
+          p Escriba su cuenta de correo electrónico
+          input#recovery-email.form-control(type='email' name='recovery-email' autocomplete='off')
+        .modal-footer
+          button.btn.btn-default(type='button' data-dismiss='modal') Cancelar
+          button.btn.btn-custom(type='button') Enviar
+      // /.modal-content
+    // /.modal-dialog
+  // /.modal
+
+//Registrar
+section
+  .modal.fade.forget-modale
+      .modal-dialog
+        .modal-content
+          form(action='/insertar', method='POST')
+            .modal-header
+              h4.modal-title Registro Cliente
+              |                      
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
+            |                   
+            .modal-body
+              .form-group
+                label Nombre Usuario
+                |                         
+                input#username.form-control(type='text', required='', name='username')
+              |                      
+              .form-group
+                label Nombre
+                |                         
+                input#nombre.form-control(type='text', required='', name='nombre')
+              |                      
+              .form-group
+                label Apellido 
+                |                         
+                input#apellido.form-control(type='text', required='', name='apellido')
+              |                      
+              .form-group
+                label Correo
+                |                         
+                input#correo.form-control(type='email', required='', name='correo')
+                |                         
+                .form-group
+                |                         
+                label Telefono 
+                |                         
+                input#telefono.form-control(type='number', required='', name='telefono')
+                |                         
+                .form-group
+                |                         
+                label Contrase&ntilde;a 
+                |                         
+                input#password.form-control(type='password', required='', name='password')
+                |                         
+                .form-group
+                |                         
+                label Confirmar Contrase&ntilde;a 
+                |                         
+                input#passConfirm.form-control(type='password', required='', name='passConfirm')
+            |                   
+            .modal-footer
+              input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')
+              |                      
+              input.btn.btn-success(type='submit', value='Registrar')
+
+// FOOTER
+footer#footer
+  .container
+    .row
+      .col-md-4.col-sm-6
+        .footer-info
+          .section-title
+            h2 GoodWarehouse
+          address
+            p
+              | Av. Rep&uacute;blica de Panam&aacute;,
+              br
+              |  (Clayton con Av. Ram&oacute;n Castilla)
+          ul.social-icon
+            li
+              a.fa.fa-facebook-square(href='#' attr='facebook icon')
+            li
+              a.fa.fa-twitter(href='#')
+            li
+              a.fa.fa-instagram(href='#')
+          .copyright-text
+            p Copyright &copy; 2018 Company
+      .col-md-4.col-sm-6
+        .footer-info
+          .section-title
+            h2 Datos de contacto
+          address
+            p +507 224 1100, +507 224 1101
+            p
+              a(href='goodwarehouse@gmail.com') goodwarehouse@gmail.com
+          .footer_menu
+            h2 Quick Links
+            ul
+              li
+                a(href='#') T&eacute;rminos y condiciones
+              li
+                a(href='#') Politica de reembolso
+      .col-md-4.col-sm-12
+        .footer-info.newsletter-form
+          .section-title
+            h2 Inscr&iacute;base al bolet&iacute;n
+          div
+            .form-group
+              form(action='#' method='get')
+                input#email.form-control(type='email' placeholder='Ingrese su correo' name='email' required='')
+                input#form-submit.form-control(type='submit' name='submit' value='Enviame')
+              span
+                sup *
+                | Tenga en cuenta que no enviamos spam a su correo electr&oacute;nico.
+// SCRIPTS
+script(src='/js/login.js')
+script(src='js/jquery.js')
+script(src='js/bootstrap.min.js')
+script(src='js/owl.carousel.min.js')
+script(src='js/smoothscroll.js')
+script(src='js/custom.js')
