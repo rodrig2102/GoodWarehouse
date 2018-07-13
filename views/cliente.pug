@@ -41,17 +41,34 @@ html(lang='en')
               a.smoothScroll(href='#about') Beneficios
             li
               a.smoothScroll(href='#team') Ubícanos
-            li
-              a.smoothScroll(href='#courses') Almacenamiento
+            li.dropdown
+              a.dropdown-toggle(data-toggle='dropdown', href='') Almacenamientos          
+              ul.dropdown-menu
+                    li
+                        a.smoothScroll(href='') Almacenamiento 5 Metros
+                    li
+                        a.smoothScroll(href='') Almacenamiento 10 Metros
+                    li
+                        a.smoothScroll(href='') Almacenamiento 15 Metros
+                    li
+                        a.smoothScroll(href='') Almacenamiento 22 Metros
+                    li
+                        a.smoothScroll(href='') Almacenamiento 30 Metros
             li
               a.smoothScroll(href='#testimonial') Comentarios
             li
               a.smoothScroll(href='#contact') Contacto
           ul.nav.navbar-nav.navbar-right
-            li
-              a(href='login')
-                i
-                |  Mi Cuenta
+            li.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='') Mi Cuenta                   
+                ul.dropdown-menu
+                    li
+                        a.smoothScroll(href='') Perfil
+                    li
+                        a.smoothScroll(href='') Mis Reservaciones
+                    li
+                        a.smoothScroll(href='') Cerrar Sesión
+
     // HOME
     section#home
       .row
@@ -407,6 +424,17 @@ html(lang='en')
                   span
                     sup *
                     | Tenga en cuenta que no enviamos spam a su correo electrónico.
+    script.
+      $(document).ready(function() {
+      $("#desplegar").css('display','none');
+      $("p").mouseenter(function() {
+      $("#desplegar").show('slow');
+      });
+      $("p").mouseleave(function() {
+      $("#desplegar").hide('slow');
+      });
+      });
+          
     // SCRIPTS
     script(src='js/jquery.js')
     script(src='js/bootstrap.min.js')

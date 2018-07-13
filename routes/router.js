@@ -2,7 +2,8 @@
 let express = require('express');
 let router = express.Router();
 let adm_usuario = require('../models/usuarios');
-let cliente = require('../models/cliente')
+let cliente = require('../models/cliente');
+let articulos = require('../models/articulos');
 
 //Renderizar views
 router.get('/', function(req, res){
@@ -13,9 +14,26 @@ router.get('/login', function(req, res){
 	res.render('login');
 });
 
-router.get('/registrarse', function(req, res){
-	res.render('registro');
+router.get('/cliente', function(req, res){
+	res.render('cliente');
 });
+
+router.get('/articulo', function(req, res){
+	res.render('articulo');
+});
+//--------------------
+router.get('/articulo/:id', function(req, res, next){
+	articulos.findOne(function(error, resultado){
+		if(resultado){
+			res.render('articulo',{articulo_image:articulos.img});
+		 }else{
+			var err = new Error('No se encontró');
+            err.status = 401;
+			next(err);
+		 }
+	});
+  });
+//--------------
 
 //loginvalidar
 router.post('/login', function(req, res, next){
@@ -32,7 +50,7 @@ router.post('/login', function(req, res, next){
 	});
 });
 
-//Estudiantes
+//Clientes
 router.get('/CRUD_Prueba',function(req, res, next){
 	if(!req.session.username){
 		res.redirect('/login');
