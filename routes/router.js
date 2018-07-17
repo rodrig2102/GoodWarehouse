@@ -21,8 +21,14 @@ router.get('/cliente', function(req, res){
 router.get('/articulo', function(req, res){
 	res.render('articulo');
 });
+
+router.get('/indexPrueba', function(req, res){
+	res.render('indexPrueba');
+});
+
+
 //--------------------
-router.get('/articulo/:id', function(req, res, next){
+router.post('/articulo/:id', function(req, res, next){
 	articulos.findOne(function(error, resultado){
 		if(resultado){
 			res.render('articulo',{articulo_image:articulos.img});
@@ -33,6 +39,19 @@ router.get('/articulo/:id', function(req, res, next){
 		 }
 	});
   });
+//--------------
+
+//---------PruebaArt-----------
+router.post('/PruebaArt', function(res, next){
+	cliente.findById(function(error,articulos){
+		if(error)
+			next(error);
+		else if(!articulos)
+			articulos = [];
+		else
+			res.render('PruebaArt',{modelo:articulos});
+	}); 
+});
 //--------------
 
 //loginvalidar
