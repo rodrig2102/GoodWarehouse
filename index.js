@@ -34,7 +34,7 @@ app.use(session({
 	})
   }));
 
-// Routes
+// Routes Adm
 let routes = require('./routes/router');
 app.use('/',routes);
 app.use(function(req,res,next){

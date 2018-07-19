@@ -22,22 +22,7 @@ usuariosappSchema.statics.authenticate = function(email,password,callback){
             return callback(null,user)
         else
             return callback();
-    })
-    
-    /* User.findOne({email:email,password:password},'username',function(err,users){
-        if(err){
-            console.log(err);
-        }
-        else if(!users){
-            var err = new Error('Usuario o password incorrectos');
-            err.status = 401;
-            return callback(err);
-        }
-        else{
-            console.log(users);
-            return callback(null,users);
-        }
-    })   */ 
+    }) 
 }
 
 let Usuarios = mongoose.model('Usuarios',usuariosappSchema);

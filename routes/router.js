@@ -1,11 +1,12 @@
 "use strict";
 let express = require('express');
 let router = express.Router();
-let adm_usuario = require('../models/usuarios');
-let cliente = require('../models/cliente');
-let articulos = require('../models/articulos');
+//let adm_usuario = require('../models/usuarios');
+let adm_cliente = require('../models/adm_clientes');
+let clientes = require('../models/cliente');
+let producto = require('../models/depositos');
 
-//Renderizar views
+//Renderizar pantallas
 router.get('/', function(req, res){
 	res.render('index');
 });
@@ -18,63 +19,76 @@ router.get('/cliente', function(req, res){
 	res.render('cliente');
 });
 
-router.get('/articulo', function(req, res){
-	res.render('articulo');
-});
 
-router.get('/indexPrueba', function(req, res){
-	res.render('indexPrueba');
-});
-
-
-//--------------------
-router.post('/articulo/:id', function(req, res, next){
-	articulos.findOne(function(error, resultado){
-		if(resultado){
-			res.render('articulo',{articulo_image:articulos.img});
-		 }else{
-			var err = new Error('No se encontró');
-            err.status = 401;
-			next(err);
-		 }
-	});
-  });
-//--------------
-
-//---------PruebaArt-----------
-router.post('/PruebaArt', function(res, next){
-	cliente.findById(function(error,articulos){
+//Ver articulos
+router.post('/depositos', function(req, res, next){
+	producto.findById(req.body.id_art,function(error,producto){
+		console.log(producto);
 		if(error)
 			next(error);
-		else if(!articulos)
-			articulos = [];
 		else
-			res.render('PruebaArt',{modelo:articulos});
+			res.render('depositos',{miproducto:producto});
 	}); 
-});
-//--------------
 
-//loginvalidar
+});
+
+//-------------------------------------------------Clientes-----------------------------------
+//loginvalidar cliente
 router.post('/login', function(req, res, next){
-	adm_usuario.authenticate(req.body.email, req.body.password, function(error,adm_usuario){
+	clientes.authenticate(req.body.correo, req.body.password, function(error,clientes){
 		if(error)
 			next(error);
-		else if(!adm_usuario) {
+		else if(!clientes) {
 			var err = new Error('Usuario o contraseña incorrecta');
             err.status = 401;
 			next(err); }
 		else{
-			req.session.username = adm_usuario.username;
-			res.redirect('/CRUD_Prueba');  }
+			req.session.username = clientes.username;
+			res.redirect('/cliente');  }
 	});
 });
 
-//Clientes
+
+//Registrar cliente
+router.post('/registrar', function(req, res, next){
+	adm_cliente.insert(req.body.username,req.body.nombre,req.body.apellido,req.body.correo,req.body.telefono,req.body.password,req.body.passConfirm, function(error,adm_usuario){
+		if(error)
+			next(error);
+		else if(adm_usuario){
+			var err = new Error('Correo ya existente');
+			err.status = 401;
+			next(err);}
+		else
+			res.redirect('/login');
+	  });
+});
+
+
+//-------------------------------------------------Administrador-----------------------------------
+//loginvalidar Administrador
+
+//logian Administrador
+
+// router.post('/login', function(req, res, next){
+// 	adm_usuario.authenticate(req.body.email, req.body.password, function(error,adm_usuario){
+// 		if(error)
+// 			next(error);
+// 		else if(!adm_usuario) {
+// 			var err = new Error('Usuario o contraseña incorrecta');
+//             err.status = 401;
+// 			next(err); }
+// 		else{
+// 			req.session.username = adm_usuario.username;
+// 			res.redirect('/CRUD_Prueba');  }
+// 	});
+// });
+
+//Administrador
 router.get('/CRUD_Prueba',function(req, res, next){
 	if(!req.session.username){
 		res.redirect('/login');
 	}
-	cliente.findAll(function(error,adm_usuario){
+	adm_cliente.findAll(function(error,adm_usuario){
 		if(error)
 			next(error);
 		else if(!adm_usuario)
@@ -84,9 +98,9 @@ router.get('/CRUD_Prueba',function(req, res, next){
 	}); 
 });
 
-//INSERTAR
+//INSERTAR cliente
 router.post('/insertar', function(req, res, next){
-	cliente.insert(req.body.username,req.body.nombre,req.body.apellido,req.body.correo,req.body.telefono,req.body.password,req.body.passConfirm, function(error,user){
+	adm_cliente.insert(req.body.username,req.body.nombre,req.body.apellido,req.body.correo,req.body.telefono,req.body.password,req.body.passConfirm, function(error,adm_usuario){
 		if(error)
 			next(error);
 		else if(adm_usuario){
@@ -98,9 +112,9 @@ router.post('/insertar', function(req, res, next){
 	  });
 });
 
-//ACTUALIZAR
+//ACTUALIZAR cliente
 router.post('/actualizar', function(req, res, next){
-	cliente.update(req.body.username,req.body.nombre,req.body.apellido,req.body.correo,req.body.telefono, function(error,msg){
+	adm_cliente.update(req.body.username,req.body.nombre,req.body.apellido,req.body.correo,req.body.telefono, function(error,msg){
 		console.log(req.body.username);
 		if(error)
 			next(error);
@@ -113,9 +127,9 @@ router.post('/actualizar', function(req, res, next){
 	  });
 });
 
-//ELIMINAR
+//ELIMINAR cliente
 router.post('/eliminar', function(req, res, next){
-	cliente.delete(req.body.username, function(error,msg){
+	adm_cliente.delete(req.body.username, function(error,msg){
 		if(error)
 			next(error);
 		else if(msg){
