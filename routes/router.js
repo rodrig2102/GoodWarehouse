@@ -9,11 +9,7 @@ let producto = require('../models/depositos');
 let reservacion = require('../models/reservacion');
 
 
-paypal.configure({
-  'mode': 'sandbox', //sandbox or live
-  'client_id': 'AQUzXkM8fWnsnqL_L5_BrfHOQk9su4V4tken0goCJjvEtu_ZbwtAGqoD4fB769l7aLXaQKZZznOxCZCH',
-  'client_secret': 'EBUXfJtnP7nU2le2mC0BXFdXwwDQctv2SlvTIDTCWXFwjIPtBvUWTI4cucTMTTruKkm0r4ZsHnZPyy-S'
-});
+
 
 
 //Renderizar pantallas
