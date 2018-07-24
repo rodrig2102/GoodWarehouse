@@ -31,7 +31,7 @@ body#top(data-spy='scroll', data-target='.navbar-collapse', data-offset='50')
           span.icon.icon-bar
           span.icon.icon-bar
         // lOGO TEXT HERE
-        a.navbar-brand(href='#') GoodWarehouse
+        a.navbar-brand(href='/#to') GoodWarehouse
       // MENU LINKS
       .collapse.navbar-collapse
         ul.nav.navbar-nav.navbar-nav-first
@@ -49,7 +49,7 @@ body#top(data-spy='scroll', data-target='.navbar-collapse', data-offset='50')
             a.smoothScroll(href='/#contact') Contacto
         ul.nav.navbar-nav.navbar-right
           li
-            a(href='#')
+            a(href='login')
               i
               |  Mi Cuenta
   section#login
@@ -58,16 +58,17 @@ body#top(data-spy='scroll', data-target='.navbar-collapse', data-offset='50')
         .col-xs-12
           .form-wrap
             h1 Inicia sesi&oacute;n
-            form#login-form(role='form' method='post')
+            if (message.length > 0) 
+              .alert.alert-danger #{message}
+                
+            form#login-form(action='/login', method='POST')
               .form-group
                 label.sr-only(for='inputCorreo') Correo
                 input#inputCorreo.form-control(type='email' name='correo' placeholder='Inrese su correo', required='')
               .form-group
                 label.sr-only(for='inputPassword') Contrase&ntilde;a
                 input#inputPassword.form-control(type='password' name='password' placeholder='Contraseña')
-              //- .checkbox
-              //-   span.character-checkbox(onclick='showPassword()')
-                span.label Monstrar contrase&ntilde;a
+                 
               input#btn-login.btn.btn-custom.btn-lg.btn-block(type='submit' value='Ingresar')
             a.forget(href='javascript:;')
               | 
@@ -103,55 +104,39 @@ body#top(data-spy='scroll', data-target='.navbar-collapse', data-offset='50')
     .modal.fade.forget-modale
         .modal-dialog
           .modal-content
-            form(action='/registrar', method='POST')
-              .modal-header
-                h4.modal-title Registro Cliente
-                |                      
-                button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
-              |                   
-              .modal-body
-                .form-group
-                  label Nombre Usuario
-                  |                         
-                  input#username.form-control(type='text', required='', name='username')
-                |                      
-                .form-group
-                  label Nombre
-                  |                         
-                  input#nombre.form-control(type='text', required='', name='nombre')
-                |                      
-                .form-group
-                  label Apellido 
-                  |                         
-                  input#apellido.form-control(type='text', required='', name='apellido')
-                |                      
-                .form-group
-                  label Correo
-                  |                         
-                  input#correo.form-control(type='email', required, name='correo')
-                  |                         
+              form(action='/registrar', method='POST')
+                .modal-header
+                  h4.modal-title Registro Cliente                      
+                  button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
+                  //- if (err_reg.length > 0) 
+                  //-   .alert.alert-danger #{message}                  
+                .modal-body
                   .form-group
-                  |                         
-                  label Telefono 
-                  |                         
-                  input#telefono.form-control(type='number', required='', name='telefono')
-                  |                         
+                    label Nombre Usuario                       
+                    input#username.form-control(type='text', required='', name='username')                      
                   .form-group
-                  |                         
-                  label Contrase&ntilde;a 
-                  |                         
-                  input#password.form-control(type='password', required='', name='password')
-                  |                         
+                    label Nombre                         
+                    input#nombre.form-control(type='text', required='', name='nombre')                      
                   .form-group
-                  |                         
-                  label Confirmar Contrase&ntilde;a 
-                  |                         
-                  input#passConfirm.form-control(type='password', required='', name='passConfirm')
-              |                   
-              .modal-footer
-                input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')
-                |                      
-                input.btn.btn-success(type='submit', value='Registrar')
+                    label Apellido                         
+                    input#apellido.form-control(type='text', required='', name='apellido')                      
+                  .form-group
+                    label Correo                         
+                    input#correo.form-control(type='email', required, name='correo')                         
+                  .form-group                         
+                    label Teléfono                          
+                    input#telefono.form-control(type='number', required='', name='telefono')                         
+                  .form-group                         
+                    label Contrase&ntilde;a                          
+                    input#password.form-control(type='password', required='', name='password')                         
+                  .form-group                         
+                    label Confirmar Contrase&ntilde;a                          
+                    input#passConfirm.form-control(type='password', required='', name='passConfirm')                  
+                .modal-footer
+                  input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')                      
+                  input.btn.btn-success(type='submit', value='Registrar')
+
+
 
   // FOOTER
   footer#footer

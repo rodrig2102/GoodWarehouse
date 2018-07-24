@@ -5,6 +5,9 @@ let bodyParser = require('body-parser');
 let session = require('express-session'); 
 let path = require('path');
 let MongoStore = require('connect-mongo')(session);
+const flash = require('connect-flash');
+const passport = require('passport');
+
 
 //Mongoose Connection 
 let mongoose = require('mongoose');
@@ -27,12 +30,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
 	secret: 'work hard',
-	resave: true,
+	resave: false,
 	saveUninitialized: false,
 	store: new MongoStore({
 		mongooseConnection: db
 	})
   }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+
 
 // Routes Adm
 let routes = require('./routes/router');

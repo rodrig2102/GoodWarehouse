@@ -2,33 +2,41 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-var clienteappSchema = new mongoose.Schema({
+var clienteSchema = new mongoose.Schema({
     username: { type: String, unique: false, required: true, trim: true },
     nombre:{ type: String, unique: false, required: true, trim: true },
     apellido:{ type: String, unique: false, required: true, trim: true },
     telefono: { type: Number, unique: false, required: true, trim: true },
     correo: { type: String, unique: false, required: false, trim: true },
-    password: { type: String, unique: false, required: true, trim: true },
-    passConfirm: { type: String, unique: false, required: true, trim: true },
+    password: { type: String, unique: false, required: true, trim: true
+    
+        // validate:{
+    //     validator:function(p){
+    //         return this.password_confirmation == p;
+    //     },
+    //     message:"las Contraseñas no son inguales"
+    //     } 
+    },
 },{collection:'cliente'});
 
-
-
-clienteappSchema.statics.authenticate = function(correo,password,callback){
-    Clientes.findOne({correo:correo},'nombre password',function(err,cliente){
+// Login 
+clienteSchema.statics.login = function(correo,password,callback){
+    Clientes.findOne({correo:correo},'correo password username',function(err,user){
         if(err)
             return callback(err);
-        else if(!cliente)
+        else if(!user)
             return callback();
-        var hash = cliente.password;
+        var hash = user.password;
         if(bcrypt.compareSync(password, hash))
-            return callback(null,cliente)
+            return callback(null,user)
         else
             return callback();
-    }) 
+    })
 }
 
-let Clientes = mongoose.model('Clientes',clienteappSchema);
+
+
+let Clientes = mongoose.model('Clientes',clienteSchema);
 module.exports = Clientes;
 
 

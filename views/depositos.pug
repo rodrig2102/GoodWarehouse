@@ -15,6 +15,7 @@ html(lang='en')
     link(rel='stylesheet', href='/css/font-awesome.min.css')
     link(rel='stylesheet', href='/css/owl.carousel.css')
     link(rel='stylesheet', href='/css/owl.theme.default.min.css')
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css', rel='stylesheet')
     // MAIN CSS
     link(rel='stylesheet', href='css/templatemo-style.css')
   body#top(data-spy='scroll', data-target='.navbar-collapse', data-offset='50')
@@ -48,10 +49,16 @@ html(lang='en')
             li
               a.smoothScroll(href='#contact') Contacto
           ul.nav.navbar-nav.navbar-right
-            li
-              a(href='login')
-                i
-                |  Mi Cuenta
+            li.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='') #{username}
+                //#{username}                  
+                ul.dropdown-menu
+                    li
+                        a.smoothScroll(href='') Perfil
+                    li
+                        a.smoothScroll(href='') Mis Reservaciones
+                    li
+                        a.smoothScroll(href='/logout') Cerrar Sesión
     
     
     // Articulo
@@ -61,6 +68,8 @@ html(lang='en')
           .row
             h2.text-center Depósitos de #{producto.nombre}
             .col-md-6.col-sm-12
+              br
+              br
               .art-image
               img.img-responsive(src=producto.imagePath)
             .col-md-6.col-sm-12
@@ -76,10 +85,9 @@ html(lang='en')
                         h4 #{producto.descripcion2}                   
                     h4 #{producto.descripcion3}
                     h4 #{producto.descripcion4}
-
-      
-    
-    
+                      form(action='/reservar', method='get')                    
+                        .form-group                                        
+                            input.btn.btn-success(type='submit', value='Reservar Depósito!')
     
     
     // CONTACT
@@ -156,5 +164,11 @@ html(lang='en')
     script(src='js/jquery.js')
     script(src='js/bootstrap.min.js')
     script(src='js/owl.carousel.min.js')
+    script(src='js/login.js')
     script(src='js/smoothscroll.js')
     script(src='js/custom.js')
+    //fecha
+    script(src='http://momentjs.com/downloads/moment.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='https://code.jquery.com/jquery-1.12.4.js')
+    script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')

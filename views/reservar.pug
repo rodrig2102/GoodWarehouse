@@ -1,0 +1,176 @@
+doctype html
+head
+  title GoodWarehouse
+  //
+    Known Template
+    http://www.templatemo.com/tm-516-known
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=Edge')
+  meta(name='description' content='')
+  meta(name='keywords' content='')
+  meta(name='author' content='')
+  meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
+  link(rel='stylesheet' href='css/bootstrap.min.css')
+  link(rel='stylesheet' href='css/font-awesome.min.css')
+  link(rel='stylesheet' href='css/owl.carousel.css')
+  link(rel='stylesheet' href='css/owl.theme.default.min.css')
+  link(rel='stylesheet' href='/css/login.css')
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css', rel='stylesheet')
+  // MAIN CSS
+  link(rel='stylesheet' href='css/templatemo-style.css')
+body#top(data-spy='scroll', data-target='.navbar-collapse', data-offset='50')
+  // PRE LOADER
+  section.preloader
+    .spinner
+      span.spinner-rotate
+  // MENU
+  section.navbar.custom-navbar.navbar-fixed-top(role='navigation')
+    .container
+      .navbar-header
+        button.navbar-toggle(data-toggle='collapse' data-target='.navbar-collapse')
+          span.icon.icon-bar
+          span.icon.icon-bar
+          span.icon.icon-bar
+        // lOGO TEXT HERE
+        a.navbar-brand(href='#') GoodWarehouse
+      // MENU LINKS
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-nav-first
+          li
+            a.smoothScroll(href='/#to') Inicio
+          li
+            a.smoothScroll(href='/#about') Beneficios
+          li
+            a.smoothScroll(href='/#team') Ub&iacute;canos
+          li
+            a.smoothScroll(href='/#courses') Almacenamiento
+          li
+            a.smoothScroll(href='/#testimonial') Comentarios
+          li
+            a.smoothScroll(href='/#contact') Contacto
+        ul.nav.navbar-nav.navbar-right
+            li.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='') #{username}
+                //#{username}                  
+                ul.dropdown-menu
+                    li
+                        a.smoothScroll(href='') Perfil
+                    li
+                        a.smoothScroll(href='') Mis Reservaciones
+                    li
+                        a.smoothScroll(href='/logout') Cerrar Sesión
+  section
+    .container
+      .row
+        .col-md-6.col-md-offset-3
+          .form-wrap
+            h1 Reservación de Depósito
+            if (message.length > 0) 
+              .alert.alert-danger #{message}
+                
+            form.form-horizontal(style='margin:0 auto')(action='/verificar', method='POST')
+              .modal-header
+                h4.modal-title Complete los siguientes campos                                     
+              .modal-body                     
+                .form-group
+                  .form-group
+                  label(for='sel1') Seleccione su Depósito:
+                  select#sel1.form-control(name='deposito')
+                    option(value='001') Depósito 5 Metros
+                    option(value='002') Depósito 10 Metros
+                    option(value='003') Depósito 15 Metros
+                    option(value='004') Depósito 22 Metros
+                    option(value='005') Depósito 30 Metros
+                        
+                  .form-group               
+                  label(for='check_in') Fecha de inicio                         
+                  input#check_in.form-control(type='text', placeholder='Fecha de entrada', name='check_in', value='', autocomplete='off', required)                         
+                  .form-group                         
+                  label(for='check_out') Fecha de salida                         
+                  input#check_out.form-control(type='text', placeholder='Fecha de salida', name='check_out', onchange='calculoNoches();', value='', autocomplete='off', required)
+                  p#calculoNoches
+                  //- script.
+                  //-   var dia= dias();
+                  //- .form-group 
+                  //- label(for='dias') Estancia:
+                  //- select#dias.form-control(name='dia')
+                  //-   option(value=7) 7 Días 
+                  //-   option(value=15) 15 Días 
+                  //-   option(value=30) 30 Días 
+                  //-   option(value=365) 1 Año                               
+              .modal-footer
+                  //input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel', href='/reservar')                     
+                  a.btn.btn-danger(href='/cliente') Cancelar
+                  input.btn.btn-success(type='submit', value='Reservar')
+            
+
+        // /.col-xs-12
+      // /.row
+    // /.container
+
+
+
+
+
+  // FOOTER
+  footer#footer
+    .container
+      .row
+        .col-md-4.col-sm-6
+          .footer-info
+            .section-title
+              h2 GoodWarehouse
+            address
+              p
+                | Av. Rep&uacute;blica de Panam&aacute;,
+                br
+                |  (Clayton con Av. Ram&oacute;n Castilla)
+            ul.social-icon
+              li
+                a.fa.fa-facebook-square(href='#' attr='facebook icon')
+              li
+                a.fa.fa-twitter(href='#')
+              li
+                a.fa.fa-instagram(href='#')
+            .copyright-text
+              p Copyright &copy; 2018 Company
+        .col-md-4.col-sm-6
+          .footer-info
+            .section-title
+              h2 Datos de contacto
+            address
+              p +507 224 1100, +507 224 1101
+              p
+                a(href='goodwarehouse@gmail.com') goodwarehouse@gmail.com
+            .footer_menu
+              h2 Quick Links
+              ul
+                li
+                  a(href='#') T&eacute;rminos y condiciones
+                li
+                  a(href='#') Politica de reembolso
+        .col-md-4.col-sm-12
+          .footer-info.newsletter-form
+            .section-title
+              h2 Inscr&iacute;base al bolet&iacute;n
+            div
+              .form-group
+                form(action='#' method='get')
+                  input#email.form-control(type='email' placeholder='Ingrese su correo' name='email' required='')
+                  input#form-submit.form-control(type='submit' name='submit' value='Enviame')
+                span
+                  sup *
+                  | Tenga en cuenta que no enviamos spam a su correo electr&oacute;nico.
+// SCRIPTS
+script(src='/js/login.js')
+script(src='js/jquery.js')
+script(src='js/bootstrap.min.js')
+script(src='js/owl.carousel.min.js')
+script(src='js/login.js')
+script(src='js/smoothscroll.js')
+script(src='js/custom.js')
+//fecha
+script(src='http://momentjs.com/downloads/moment.min.js')
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+script(src='https://code.jquery.com/jquery-1.12.4.js')
+script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')

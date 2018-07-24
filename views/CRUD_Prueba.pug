@@ -1,26 +1,16 @@
 doctype html
 html(lang='en')
   head
-    meta(charset='utf-8')
-    |       
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    |       
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    |       
-    title Bootstrap CRUD Data Table for Database with Modal Form
-    |       
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto|Varela+Round')
-    |       
-    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
-    |       
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-    |       
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-    |       
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
-    |       
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-    |       
+    meta(charset='utf-8')       
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')       
+    meta(name='viewport', content='width=device-width, initial-scale=1')       
+    title Bootstrap CRUD Data Table for Database with Modal Form       
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto|Varela+Round')       
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')       
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')       
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')       
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')       
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')       
     style(type='text/css').
       body {
       color: #566787;
@@ -196,89 +186,67 @@ html(lang='en')
             .col-sm-6
               a.btn.btn-success(href='#addEmployeeModal', data-toggle='modal')
                 i.material-icons &#xE147;
-                span Add New Employee
-        |             
+                span Add New Employee             
         table.table.table-striped.table-bordered.table-hover.table-responsive(style='overflow:auto')
           thead
             tr
-              th #
-              |                      
-              th Usuario
-              |                      
-              th Nombre
-              |                      
-              th Apellido
-              |                      
-              th Correo
-              |                      
-              th Telefono
-          |                
+              th #                     
+              th Usuario                     
+              th Nombre                     
+              th Apellido                     
+              th Correo                     
+              th Telefono                
           tbody
-            tr             
-                -var number = 0;
-                each lista in modelo
-                  td #{number+1} 
-                  td #{lista.username}
-                  td #{lista.nombre}
-                  td #{lista.apellido}
-                  td #{lista.correo}
-                  td #{lista.telefono}
-                    a.edit(href='#editEmployeeModal', data-toggle='modal')
-                      i.material-icons(data-toggle='tooltip', title='Edit') 
-                    a.delete(href='#deleteEmployeeModal', data-toggle='modal')
-                      i.material-icons(data-toggle='tooltip', title='Delete')  
+            //-var number = 0;
+            each lista in modelo
+              tr    
+              -var number = 0;         
+                td #{number+1} 
+                td #{lista.username}
+                td #{lista.nombre}
+                td #{lista.apellido}
+                td #{lista.correo}
+                td #{lista.telefono}
+                  a.edit(href='#editEmployeeModal', data-toggle='modal')
+                    i.material-icons(data-toggle='tooltip', title='Edit') 
+                  a.delete(href='#deleteEmployeeModal', data-toggle='modal')
+                    i.material-icons(data-toggle='tooltip', title='Delete')  
+  
+   
+   
     // Edit Modal HTML
     #addEmployeeModal.modal.fade
       .modal-dialog
         .modal-content
           form(action='/insertar', method='POST')
             .modal-header
-              h4.modal-title Agregar Cliente
-              |                      
-              button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
-            |                   
+              h4.modal-title Agregar Cliente                      
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;                 
             .modal-body
               .form-group
-                label Nombre Usuario
-                |                         
-                input#username.form-control(type='text', required='', name='username')
-              |                      
+                label Nombre Usuario                        
+                input#username.form-control(type='text', required='', name='username')                      
               .form-group
-                label Nombre
-                |                         
+                label Nombre                        
                 input#nombre.form-control(type='text', required='', name='nombre')
-              |                      
+                      
               .form-group
-                label Apellido 
-                |                         
-                input#apellido.form-control(type='text', required='', name='apellido')
-              |                      
+                label Apellido                         
+                input#apellido.form-control(type='text', required='', name='apellido')                     
               .form-group
-                label Correo
-                |                         
-                input#correo.form-control(type='email', required='', name='correo')
-                |                         
-                .form-group
-                |                         
-                label Telefono 
-                |                         
-                input#telefono.form-control(type='number', required='', name='telefono')
-                |                         
-                .form-group
-                |                         
-                label Contrase&ntilde;a 
-                |                         
-                input#password.form-control(type='password', required='', name='password')
-                |                         
-                .form-group
-                |                         
-                label Confirmar Contrase&ntilde;a 
-                |                         
-                input#passConfirm.form-control(type='password', required='', name='passConfirm')
-            |                   
+                label Correo                        
+                input#correo.form-control(type='email', required='', name='correo')                        
+                .form-group                        
+                label Telefono                         
+                input#telefono.form-control(type='number', required='', name='telefono')                        
+                .form-group                        
+                label Contrase&ntilde;a                         
+                input#password.form-control(type='password', required='', name='password')                        
+                .form-group                        
+                label Confirmar Contrase&ntilde;a                         
+                input#passConfirm.form-control(type='password', required='', name='passConfirm')                  
             .modal-footer
-              input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')
-              |                      
+              input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')                      
               input.btn.btn-success(type='submit', value='Registrar')
     // Edit Modal HTML
     #editEmployeeModal.modal.fade
@@ -286,39 +254,26 @@ html(lang='en')
         .modal-content
           form(action='/actualizar', method='POST')
             .modal-header
-              h4.modal-title Editar Cliente
-              |                      
-              button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
-            |                   
+              h4.modal-title Editar Cliente                      
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;                  
             .modal-body
               .form-group
-                label Nombre Usuario
-                |                         
-                input#username.form-control(type='text', required='')
-              |                      
+                label Ingrese el Username del Cliente a editar                        
+                input#username.form-control(type='text', required='', name='username')                      
               .form-group
-                label Nombre
-                |                         
-                input#nombre.form-control(type='text', required='')
-              |                      
+                label Nombre                        
+                input#nombre.form-control(type='text', required='', name='nombre')                     
               .form-group
-                label Apellido
-                |                         
-                input#apellido.form-control(type='text', required='')
-              |                      
+                label Apellido                        
+                input#apellido.form-control(type='text', required='', name='apellido')                     
               .form-group
-                label Correo
-                |                         
-                input#correo.form-control(type='email', required='')
-              |                      
+                label Correo                        
+                input#correo.form-control(type='email', required='', name='correo')                      
               .form-group
-                label Telefono
-                |                         
-                input#telefono.form-control(type='number', required='')
-            |                   
+                label Telefono                        
+                input#telefono.form-control(type='number', required='', name='telefono')                   
             .modal-footer
-              input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')
-              |                      
+              input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')                      
               input.btn.btn-info(type='submit', value='Actualizar')
     // Delete Modal HTML
     #deleteEmployeeModal.modal.fade
@@ -326,24 +281,15 @@ html(lang='en')
         .modal-content
           form(action='/eliminar', method='POST')
             .modal-header
-              h4.modal-title Borra Cliente
-              |                      
-              button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
-            |                   
+              h4.modal-title Borra Cliente                      
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;                   
             .modal-body                      
               .form-group
-
-                label Username
-                |                         
+                label Ingresa el Username del Cliente                       
                 input.form-control(type='text', value=modelo.username, name='username', required='')
-                |
-                p &iquest;Seguro que quieres eliminar este registros?
-                |                      
+                p &iquest;Seguro que quieres eliminar este registros?                     
                 p.text-warning
-                  small Esta acci&oacute;n no se puede deshacer.
-                |
-            |                   
+                  small Esta acci&oacute;n no se puede deshacer.                  
             .modal-footer
-              input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')
-              |                      
+              input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')                      
               input.btn.btn-danger(type='submit', value='Delete')

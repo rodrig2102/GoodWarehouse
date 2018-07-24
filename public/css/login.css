@@ -74,4 +74,12 @@
     .btn-custom:focus {
         color: #fff;
     }
+
+    .panel-def{
+        background: #b9f6ca;
+    }
+    
+    .ftd{
+        text-align: center;
+    }
     
