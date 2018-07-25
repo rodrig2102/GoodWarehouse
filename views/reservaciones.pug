@@ -56,12 +56,42 @@ body#top(data-spy='scroll', data-target='.navbar-collapse', data-offset='50')
                     li
                         a.smoothScroll(href='') Perfil
                     li
-                        a.smoothScroll(href='') Mis Reservaciones
+                        a.smoothScroll(href='/reservaciones') Mis Reservaciones
                     li
                         a.smoothScroll(href='/logout') Cerrar Sesión
   
 
-    H2 Hola Reservaciones
+  section
+    .container
+    .text-center
+      h2 Reservaciones Realizadas
+    .row
+      .col-md-6.col-md-offset-3
+        .panel.panel-success
+          .panel-heading
+          .panel-body
+            h3.panel-title Detalle
+            table.table.table-condensed
+              thead
+                tr
+                  th.ftd #Depósito 
+                  th.ftd Descripción
+                  th.ftd Fecha Inicio
+                  th.ftd Fecha Salida
+                  th.ftd Monto Pagado
+              tbody
+                each item in reservaciones
+                  tr
+                    td.ftd #{item.NumDepo}
+                    td.ftd #{item.DescripcionDepo}
+                    td.ftd #{item.fecha_ini}
+                    td.ftd #{item.fecha_fin}
+                    td.ftd #{item.MontoPagado} 
+          // panel body
+          .panel-footer.panel-def
+            | GoodWarehouse
+
+          
   // FOOTER
   footer#footer
     .container

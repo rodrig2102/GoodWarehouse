@@ -76,6 +76,36 @@ adm_clienteSchema.statics.update = function(username,nombre,apellido,correo,tele
     });   
 };
 
+adm_clienteSchema.statics.updatePerfil = function(username,nombre,apellido,correo,telefono, password, callback){
+    Adm_Cliente.findOne({correo:correo},'username nombre apellido correo telefono',function(err,user){
+        if(err)
+            return callback(err);
+        else if(!user){
+            console.log(user);
+            return callback();
+        }
+        else{
+                if(username)
+                    user.username = username;
+                if(nombre)
+                    user.nombre=nombre;
+                if(apellido)
+                    user.apellido = apellido;               
+                if(correo)
+                    user.correo = correo;
+                if(telefono)
+                    user.telefono = telefono;
+                if(password)
+                    user.password = bcrypt.hashSync(password, saltRounds),
+                user.save(function(err){
+                    if(err)
+                        return callback(err);
+                    return callback(null,true);
+                });
+            }
+    });   
+};
+
 adm_clienteSchema.statics.delete = function(username,callback){
     Adm_Cliente.findOne({username:username},'username',function(err,users){
         if(err)

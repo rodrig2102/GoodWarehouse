@@ -9,36 +9,13 @@ let producto = require('../models/depositos');
 let reservacion = require('../models/reservacion');
 
 
-
-
-
-//Renderizar pantallas
-router.get('/', function(req, res){
-	res.render('index');
-});
-router.get('/perfil', function(req, res){
-	res.render('perfil');
-});
-router.get('/login', function(req, res){
-	res.render('login',{message:'',err_reg:''});
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live
+  'client_id': 'AQUzXkM8fWnsnqL_L5_BrfHOQk9su4V4tken0goCJjvEtu_ZbwtAGqoD4fB769l7aLXaQKZZznOxCZCH',
+  'client_secret': 'EBUXfJtnP7nU2le2mC0BXFdXwwDQctv2SlvTIDTCWXFwjIPtBvUWTI4cucTMTTruKkm0r4ZsHnZPyy-S'
 });
 
-router.get('/reservar', function(req, res){
-	if(req.session.user){
-		res.render('reservar',{message:'',err_reg:'',username:req.session.user.username});
-	}
-	else{
-		res.redirect('/login');
-	}
-});
-router.get('/factura', function(req, res){
-	if(req.session.user){
-		res.render('factura',{message:'',err_reg:'',username:req.session.user.username});
-	}
-	else{
-		res.redirect('/login');
-	}
-});
+//----------------------Administrador--------------------------------------------------------------
 
 
 //Renderizar Vista Login Administracion
@@ -61,32 +38,184 @@ router.get('/administracion', function(req, res){
 	}); 
 });
 
-//---------------------------Registrar Fecha
-//Registrar fecha
-router.get('/registrarf', function(req, res, next){
-	reservacion.insert(req.body.check_in,req.body.check_out, function(error,reservacion){
-		if(error){
-			//next(error);
-			//esta entrando aqui!!!!
-			var err = new Error('Correo ya existente');
+//Login Administrador
+router.post('/login_adm', function(req, res, next){
+	adm_usuario.authenticate(req.body.correo, req.body.password, function(error,adm_usuario){
+		if(error)
+			next(error);
+		else if(!adm_usuario) {
+			res.render('index_adm', {message:('Usuario o contraseña incorrecta')});
+		}
+		else{
+			req.session.username = adm_usuario.username;
+			res.redirect('/administracion');  
+		}
+	});
+});
+
+
+//INSERTAR cliente
+router.post('/insertar', function(req, res, next){
+	adm_cliente.insert(req.body.username,req.body.nombre,req.body.apellido,req.body.correo,req.body.telefono,req.body.password, function(error,adm_usuario){
+		if(error)
+			next(error);
+		if(adm_usuario){
+			var err = new Error('Usuario ya existente');
 			err.status = 401;
 			next(err);
 		}
-		else if(reservacion){
-			// var err = new Error('Correo ya existente');
-			// err.status = 401;
-			// next(err);
-			res.render('login', {err_reg:('Correo ya existente')});
+		if(!adm_usuario){
+			res.redirect('/administracion');
 		}
-		else
-			res.redirect('/login');
+	  });
+});
+
+//ACTUALIZAR cliente
+router.post('/actualizar', function(req, res, next){
+	adm_cliente.update(req.body.username,req.body.nombre,req.body.apellido,req.body.correo,req.body.telefono, function(error,msg){
+		console.log(req.body.username);
+		if(error)
+			next(error);
+		if(!msg){
+			var err = new Error('Usuario no existe');
+			err.status = 401;
+			next (err);
+			//res.redirect('administracion', {message:('Usuario no existe')});
+		}
+		if(msg){
+			res.redirect('/administracion');
+		}
+		
+	  });
+});
+
+//ELIMINAR cliente
+router.post('/eliminar', function(req, res, next){
+	adm_cliente.delete(req.body.username, function(error,msg){
+		if(error)
+			next(error);
+		if(msg){
+			var err = new Error('usuario no existe');
+			err.status = 401;
+			next(err);
+		}
+		if(!msg){
+			console.log('exito');
+			res.redirect('/administracion');}
 	  });
 });
 
 
-//---------fin registrar fecha
+
+//------------------------------------Cliente-----------------------------------------
 
 
+
+//Renderizar pantallas
+
+//Pantalla Inicio
+router.get('/', function(req, res){
+	res.render('index');
+});
+//Error Pagina
+router.get('/404Page', function(req, res){
+	res.render('404Page');
+});
+//Perfil Cliente
+router.get('/perfil', function(req, res){
+	if(req.session.user){
+		
+		adm_cliente.findOne({username:req.session.user.username},function(err,docs){
+			if(err)
+			next(err);
+			else if(!docs)
+			docs = [];
+			else
+			res.render('perfil',{username:req.session.user.username, datos:docs, message:''});
+		});
+	}
+	else{
+		res.redirect('/login');
+	}
+});
+//Perfil Cliente
+router.post('/perfil', function(req, res){
+	adm_cliente.updatePerfil(req.body.username,req.body.nombre,req.body.apellido,req.session.user.correo,req.body.telefono, function(error,msg){
+		console.log(req.body.username);
+		if(error)
+			next(error);
+		if(!msg){
+			var err = new Error('Usuario no existe');
+			err.status = 401;
+			next (err);
+			//res.redirect('administracion', {message:('Usuario no existe')});
+		}
+		if(msg){
+			res.redirect('/reservacion');
+		}
+		
+	  });
+});
+//Login Cliente
+router.get('/login', function(req, res){
+	res.render('login',{message:'',err_reg:''});
+});
+//No Deberia Hacer esto
+router.get('/cliente#top', function(req, res){
+	res.render('cliente#top');
+});
+router.get('/cliente#about', function(req, res){
+	res.render('cliente#about');
+});
+router.get('/cliente#team', function(req, res){
+	res.render('cliente#team');
+});
+router.get('/cliente#courses', function(req, res){
+	res.render('cliente#courses');
+});
+router.get('/cliente#testimonial', function(req, res){
+	res.render('cliente#testimonial');
+});
+router.get('/cliente#contact', function(req, res){
+	res.render('cliente#contact');
+});
+
+//Pantall Solicitud de Reservacion
+router.get('/reservar', function(req, res){
+	if(req.session.user){
+		res.render('reservar',{message:'',err_reg:'',username:req.session.user.username});
+	}
+	else{
+		res.redirect('/login');
+	}
+});
+//Pantalla Factura
+router.get('/factura', function(req, res){
+	if(req.session.user){
+		res.render('factura',{message:'',err_reg:'',username:req.session.user.username});
+	}
+	else{
+		res.redirect('/login');
+	}
+});
+//Pantalla Reservaciones Cliente
+router.get('/reservaciones', function(req, res){
+	if(req.session.user){
+		
+		reservacion.find({},function(err,docs){
+			if(err)
+			next(err);
+			else if(!docs)
+			docs = [];
+			else
+			res.render('reservaciones',{username:req.session.user.username, reservaciones:docs, message:''});
+	
+		});
+	}
+	else{
+		res.redirect('/login');
+	}
+});
 
 
 //Verificar Disponibilidad por Fechas
@@ -95,9 +224,6 @@ router.post('/verificar', function(req, res, next){
 	 let fecha_i = (req.body.check_in);
 	 let fecha_f = (req.body.check_out);
 	 let depo = req.body.deposito;
-	 //var dias = (req.body.dia);
-	 //let  query = {fecha_ini:fecha_i,fecha_fin:fecha_f};
-	 //var query = {id__idDeposito:deposito} id__idDeposito
 
 	//PRUEBA DE PARA EL DIA
 	function parseDate(str) {
@@ -141,6 +267,7 @@ router.post('/verificar', function(req, res, next){
 							let total= (costo + tax);
 						
 							req.session.factura.push({
+								IDDepo:deposito._id,
 								Producto: deposito.id_art,
 								Descripcion : deposito.nombre,
 								Precio:precio,
@@ -154,13 +281,12 @@ router.post('/verificar', function(req, res, next){
 						});			
 					}
 
-			res.render('factura',{factura:req.session.factura});
+			res.render('factura',{factura:req.session.factura, username:req.session.user.username,});
 			});
 		};
 	});
 });
 
-//-------------------------------------------------Clientes-----------------------------------
 
 //login validar cliente
 router.post('/login', function(req, res, next){
@@ -178,7 +304,7 @@ router.post('/login', function(req, res, next){
 			res.redirect('/cliente');  }		
 	});
 });
-//Perfil Cliente
+//Index Cliente
 router.get('/cliente', (req, res, next) =>{	
 	if(req.session.user){
 		res.render('cliente',{username:req.session.user.username},);
@@ -234,96 +360,12 @@ router.post('/depositos',function(req, res, next){
 	}
 });
 
-//-------------------------------------------------Administrador-----------------------------------
-//loginvalidar Administrador
-
-//logian Administrador
-
-router.post('/login_adm', function(req, res, next){
-	adm_usuario.authenticate(req.body.correo, req.body.password, function(error,adm_usuario){
-		if(error)
-			next(error);
-		else if(!adm_usuario) {
-			res.render('index_adm', {message:('Usuario o contraseña incorrecta')});
-		}
-		else{
-			req.session.username = adm_usuario.username;
-			res.redirect('/administracion');  
-		}
-	});
-});
-
-//Administrador
-// router.get('/CRUD_Prueba',function(req, res, next){
-// 	if(!req.session.username){
-// 		res.redirect('/index_adm');
-// 	}
-// 	adm_cliente.findAll(function(error,adm_usuario){
-// 		if(error)
-// 			next(error);
-// 		else if(!adm_usuario)
-// 			adm_usuario = [];
-// 		else
-// 			res.render('CRUD_Prueba',{usuarios:req.session.username, modelo:adm_usuario});
-// 	}); 
-// });
-
-//INSERTAR cliente
-router.post('/insertar', function(req, res, next){
-	adm_cliente.insert(req.body.username,req.body.nombre,req.body.apellido,req.body.correo,req.body.telefono,req.body.password, function(error,adm_usuario){
-		if(error)
-			next(error);
-		if(adm_usuario){
-			var err = new Error('Usuario ya existente');
-			err.status = 401;
-			next(err);
-		}
-		if(!adm_usuario){
-			res.redirect('/administracion');
-		}
-	  });
-});
-
-//ACTUALIZAR cliente
-router.post('/actualizar', function(req, res, next){
-	adm_cliente.update(req.body.username,req.body.nombre,req.body.apellido,req.body.correo,req.body.telefono, function(error,msg){
-		console.log(req.body.username);
-		if(error)
-			next(error);
-		if(!msg){
-			var err = new Error('Usuario no existe');
-			err.status = 401;
-			next (err);
-			//res.redirect('administracion', {message:('Usuario no existe')});
-		}
-		if(msg){
-			res.redirect('/administracion');
-		}
-		
-	  });
-});
-
-//ELIMINAR cliente
-router.post('/eliminar', function(req, res, next){
-	adm_cliente.delete(req.body.username, function(error,msg){
-		if(error)
-			next(error);
-		if(msg){
-			var err = new Error('usuario no existe');
-			err.status = 401;
-			next(err);
-		}
-		if(!msg){
-			console.log('exito');
-			res.redirect('/administracion');}
-	  });
-});
 
 
-//FACTURA
+
+
+//Pantalla FACTURA
 router.post('/factura/verificar', (req, res) => {
-	//let total = toString(req.body.tot);
-	//let name = req.body.des;
 	let monto;
 	let name;
 	let id;
@@ -343,8 +385,8 @@ router.post('/factura/verificar', (req, res) => {
 			"payment_method": "paypal"
 		},
 		"redirect_urls": {
-			"return_url": "http://localhost:3000/factura/reservaciones",
-			"cancel_url": "http://localhost:3000/factura/cancel"
+			"return_url": "http://localhost:3000/factura/success",
+			"cancel_url": "http://localhost:3000/reservar"
 		},
 		"transactions": [{
 			"item_list": {
@@ -377,32 +419,26 @@ router.post('/factura/verificar', (req, res) => {
 	});
 	
 });
-//Reservaciones
-router.get('/factura/reservaciones', function(req, res){
+//Guarda Reservaciones en la Base de Datos
+router.get('/factura/success', function(req, res){
 	if(req.session.user){
 		let id_depo;
-		let id_cli = req.session.user;
+		let id_cli = req.session.user._id;
 		let fei;
 		let fef;
+		let tot;
+		let numPro;
+		let description;
+
 		req.session.factura.forEach(item => {
-			id_depo= item.Producto,
+			id_depo= item.IDDepo,
 			fei = item.Fecha_i,
 			fef= item.Fecha_f
+			tot= item.Total;
+			numPro=item.Producto;
+			description=item.Descripcion;
 		});
-		// reservacion.insert(id_depo,id_cli,fei,fef, function(error,reservacion){
-		// 	if(error){
-		// 		return res.status(500).send({message:'Error en la consulta'})
-		// 	}
-		// 	if(reservacion){
-		// 		res.render('reservaciones');
-		// 		res.send('exito');
-		// 	}
-		// 	if(!reservacion){
-		// 		res.render('reservaciones');
-		// 		res.send('exito');
-		// 	}
-		//   });
-		//res.render('reservaciones',{username:req.session.user.username});
+		
 		reservacion.findOne({fei:fei},'fecha_ini',function(err,user){
 			console.log('Id_Cliente es',id_cli);
 			console.log('Id_Deposito es',id_depo);
@@ -416,16 +452,19 @@ router.get('/factura/reservaciones', function(req, res){
 			}
 			else{
 				var data={
-					_idCliente:2,
+					_idCliente:id_cli,
 					_idDeposito:id_depo,
+					NumDepo:numPro,
+    				DescripcionDepo: description,
 					fecha_ini:fei,
-					fecha_fin:fef
+					fecha_fin:fef,
+					MontoPagado:tot,
 				};
 				reservacion.create(data,function(err){
 					if(err)
 						return res.status(500).send({message:'Error guradar los datos'})
 				});
-				res.render('reservaciones');
+				res.redirect('/reservaciones');
 				//res.send('exito');
 			}
 		});
@@ -435,13 +474,31 @@ router.get('/factura/reservaciones', function(req, res){
 		res.redirect('/login');
 	}
 });
-	
-	router.get('/factura/success', (req, res) => {
-	// 
-	res.send('exito');
+//Actualizar Perfil
+//ACTUALIZAR cliente
+router.post('/actualizarP', function(req, res, next){
+	adm_cliente.updatePerfil(req.body.username,req.body.nombre,req.body.apellido,req.session.user.correo,req.body.telefono,req.body.password, function(error,msg){
+		console.log(req.body.username);
+		if(error)
+			next(error);
+		if(!msg){
+			var err = new Error('Correo ya existente');
+			err.status = 401;
+			next (err);
+			//res.redirect('administracion', {message:('Usuario no existe')});
+		}
+		if(msg){
+			res.redirect('/perfil');
+		}
+		
+	  });
 });
+// 	router.get('/factura/success', (req, res) => {
+// 	// 
+// 	res.send('exito');
+// });
 	
-	router.get('/cancel', (req, res) => res.send('Cancelled'));
+// router.get('/cancel', (req, res) => res.send('Cancelled'));
 
 
 module.exports = router;

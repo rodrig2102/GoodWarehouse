@@ -37,28 +37,28 @@ body#top(data-spy='scroll', data-target='.navbar-collapse', data-offset='50')
       .collapse.navbar-collapse
         ul.nav.navbar-nav.navbar-nav-first
           li
-            a.smoothScroll(href='/#to') Inicio
+            a.smoothScroll(href='/cliente#top') Inicio
           li
-            a.smoothScroll(href='/#about') Beneficios
+            a.smoothScroll(href='/cliente#about') Beneficios
           li
-            a.smoothScroll(href='/#team') Ub&iacute;canos
+            a.smoothScroll(href='/cliente#team') Ubícanos
           li
-            a.smoothScroll(href='/#courses') Almacenamiento
+            a.smoothScroll(href='/cliente#courses') Almacenamiento
           li
-            a.smoothScroll(href='/#testimonial') Comentarios
+            a.smoothScroll(href='/cliente#testimonial') Comentarios
           li
-            a.smoothScroll(href='/#contact') Contacto
+            a.smoothScroll(href='/cliente#contact') Contacto
         ul.nav.navbar-nav.navbar-right
-            li.dropdown
-                a.dropdown-toggle(data-toggle='dropdown', href='') #{username}
-                //#{username}                  
-                ul.dropdown-menu
-                    li
-                        a.smoothScroll(href='') Perfil
-                    li
-                        a.smoothScroll(href='') Mis Reservaciones
-                    li
-                        a.smoothScroll(href='/logout') Cerrar Sesión
+          li.dropdown
+              a.dropdown-toggle(data-toggle='dropdown', href='') #{username}
+              //#{username}                  
+              ul.dropdown-menu
+                  li
+                      a.smoothScroll(href='') Perfil
+                  li
+                      a.smoothScroll(href='/reservaciones') Mis Reservaciones
+                  li
+                      a.smoothScroll(href='/logout') Cerrar Sesión
   section
     .container
       .row

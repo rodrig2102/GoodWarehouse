@@ -1,0 +1,32 @@
+doctype html
+head
+    title GoodWarehouse
+    //
+        Known Template
+        http://www.templatemo.com/tm-516-known
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=Edge')
+    meta(name='description' content='')
+    meta(name='keywords' content='')
+    meta(name='author' content='')
+
+    link#bootstrap-css(href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css', rel='stylesheet')
+    link(rel='stylesheet' href='/css/404.css')
+    script(src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
+    script(src='//code.jquery.com/jquery-1.11.1.min.js')
+    // ---- Include the above in your HEAD tag --------
+    .container
+    .row
+        .col-md-12
+        .error-template
+            h1
+            | Oops!
+            h2
+            | 404 Not Found
+            .error-details
+            | Lo sentimos, se ha producido un error.
+            .error-actions
+            a.btn.btn-primary.btn-lg(href='cliente')
+                span.glyphicon.glyphicon-home
+                |                         Take Me Home
+            
