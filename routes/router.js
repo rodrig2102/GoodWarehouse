@@ -124,14 +124,17 @@ router.get('/404Page', function(req, res){
 //Perfil Cliente
 router.get('/perfil', function(req, res){
 	if(req.session.user){
-		
-		adm_cliente.findOne({username:req.session.user.username},function(err,docs){
+		//console.log('pruebaPerfil',req.session.user.username);
+		let usuario = req.session.user.username;
+		adm_cliente.findOne({username:usuario},function(err,docs){
+			console.log('pruebaPerfil',docs);
 			if(err)
-			next(err);
-			else if(!docs)
-			docs = [];
-			else
-			res.render('perfil',{username:req.session.user.username, datos:docs, message:''});
+				next(err);
+			if(!docs)
+				docs = [];
+			if(docs)
+				console.log('ESTO ES LO QUE SE MANDA',docs);
+				res.render('perfil',{docs:docs,username:req.session.user.username, message:''});
 		});
 	}
 	else{
@@ -160,7 +163,7 @@ router.post('/perfil', function(req, res){
 router.get('/login', function(req, res){
 	res.render('login',{message:'',err_reg:''});
 });
-//No Deberia Hacer esto
+//No 
 router.get('/cliente#top', function(req, res){
 	res.render('cliente#top');
 });
@@ -201,8 +204,8 @@ router.get('/factura', function(req, res){
 //Pantalla Reservaciones Cliente
 router.get('/reservaciones', function(req, res){
 	if(req.session.user){
-		
-		reservacion.find({},function(err,docs){
+		let usuario = req.session.user._id;
+		reservacion.find({_idCliente:usuario},function(err,docs){
 			if(err)
 			next(err);
 			else if(!docs)
@@ -500,5 +503,7 @@ router.post('/actualizarP', function(req, res, next){
 	
 // router.get('/cancel', (req, res) => res.send('Cancelled'));
 
-
+router.use(function(re, res){
+	res.status(404).render('404Page');
+});
 module.exports = router;

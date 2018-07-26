@@ -65,21 +65,45 @@ body#top(data-spy='scroll', data-target='.navbar-collapse', data-offset='50')
       h2 Perfil
     .row
       .col-md-6.col-md-offset-3
-         
-          //- form(action='/actualizarP', method='POST')
+        each producto in docs
+            |#{producto.nombre}
+            h1 Descripcion :#{producto.apellido}      
+        //-   form(action='/actualizarP', method='POST')
+        //-     .form-group
+        //-         label Nombre de Usuario                         
+        //-         input#username.form-control(type='text', required='', name='username',value = item.username)                      
+        //-     .form-group
+        //-         label Nombre                        
+        //-         input#nombre.form-control(type='text', required='', name='nombre',value = item.nombre)                     
+        //-     .form-group
+        //-         label Apellido                        
+        //-         input#apellido.form-control(type='text', required='', name='apellido',value = item.apellido)                                         
+        //-     .form-group
+        //-         label Telefono                        
+        //-         input#telefono.form-control(type='number', required='', name='telefono',value = item.telefono)
+        //-     .form-group                         
+        //-         label Contrase&ntilde;a                          
+        //-         input#password.form-control(type='password', required='', name='password')                         
+        //-     .form-group                         
+        //-         label Confirmar Contrase&ntilde;a                          
+        //-         input#passConfirm.form-control(type='password', required='', name='passConfirm')                     
+        //-     .modal-footer
+        //-     input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')                      
+        //-     input.btn.btn-info(type='submit', value='Actualizar')
+        //- form(action='/actualizarP', method='POST')
       
           //-     .form-group
           //-         label Nombre de Usuario                         
-          //-         input#username.form-control(type='text', required='', name='username',value = item.username)                      
+          //-         input#username.form-control(type='text', required='', name='username')                      
           //-     .form-group
           //-         label Nombre                        
-          //-         input#nombre.form-control(type='text', required='', name='nombre',value = item.nombre)                     
+          //-         input#nombre.form-control(type='text', required='', name='nombre')                  
           //-     .form-group
           //-         label Apellido                        
-          //-         input#apellido.form-control(type='text', required='', name='apellido',value = item.apellido)                                         
+          //-         input#apellido.form-control(type='text', required='', name='apellido')                                         
           //-     .form-group
           //-         label Telefono                        
-          //-         input#telefono.form-control(type='number', required='', name='telefono',value = item.telefono)
+          //-         input#telefono.form-control(type='number', required='', name='telefono')
           //-     .form-group                         
           //-         label Contrase&ntilde;a                          
           //-         input#password.form-control(type='password', required='', name='password')                         
@@ -89,29 +113,6 @@ body#top(data-spy='scroll', data-target='.navbar-collapse', data-offset='50')
           //-     .modal-footer
           //-     input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')                      
           //-     input.btn.btn-info(type='submit', value='Actualizar')
-          form(action='/actualizarP', method='POST')
-      
-              .form-group
-                  label Nombre de Usuario                         
-                  input#username.form-control(type='text', required='', name='username')                      
-              .form-group
-                  label Nombre                        
-                  input#nombre.form-control(type='text', required='', name='nombre')                  
-              .form-group
-                  label Apellido                        
-                  input#apellido.form-control(type='text', required='', name='apellido')                                         
-              .form-group
-                  label Telefono                        
-                  input#telefono.form-control(type='number', required='', name='telefono')
-              .form-group                         
-                  label Contrase&ntilde;a                          
-                  input#password.form-control(type='password', required='', name='password')                         
-              .form-group                         
-                  label Confirmar Contrase&ntilde;a                          
-                  input#passConfirm.form-control(type='password', required='', name='passConfirm')                     
-              .modal-footer
-              input.btn.btn-default(type='button', data-dismiss='modal', value='Cancel')                      
-              input.btn.btn-info(type='submit', value='Actualizar')
   // FOOTER
   footer#footer
     .container

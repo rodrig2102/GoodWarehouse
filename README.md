@@ -1,3 +1,3 @@
 # 1LS141-GoodWarehouse
 Proyecto Final
-Eliecer Rodriguez & Jorge Palacios
+Eliecer Rodriguez

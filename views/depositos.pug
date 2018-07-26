@@ -78,18 +78,15 @@ html(lang='en')
                 div
                     p
                       | #{producto.descripcion1}
-                    figure
-                    span
-                     i.fa.fa-certificate
                       figcaption
                         h4 #{producto.descripcion2}                   
                     h4 #{producto.descripcion3}
                     h4 #{producto.descripcion4}
-                      form(action='/reservar', method='get')                    
-                        .form-group                                        
-                            input.btn.btn-success(type='submit', value='Reservar Depósito!')
-    
-    
+                form(action='/reservar', method='get')                    
+                  .form-group.text-center                                        
+                      input.btn.btn-success(type='submit', value='Reservar Depósitos!')
+
+
     // CONTACT
     section#contact
       .container
